@@ -11,6 +11,8 @@ class showtime extends Model
 {
     use HasFactory;
 
+    public $fillable = ['cinemaId','showTime','title','category'];
+
     public function cinema()
     {
     	return $this->hasOne(cinema::class, 'id','cinemaId');

@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>IderaCinema</title>
+        <title>IderaCinema - Cinema Showtime</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -23,19 +23,22 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
+
+<link href=" {{ URL('/plugins/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
     </head>
     <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0" style="min-height: 2vh !important;">
+    <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0" style="min-height: 2vh !important;">
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
+
                     <a href="{{ url('/') }}" class="text-sm text-white-700 underline" style="color: white !important;">Home </a>
 
 
-                    <a href="{{ url('/admin/addShowtime') }}" class="text-sm text-white-700 underline" style="color: white !important;">Add Showtime</a>
+                        <a href="{{ url('/admin/addShowtime') }}" class="text-sm text-white-700 underline" style="color: white !important;">Add Showtime</a>
 
-<a href="{{ url('/signout') }}" class="text-sm text-white-700 underline" style="color: white !important;">Logout</a>
-@else
+                        <a href="{{ url('/signout') }}" class="text-sm text-white-700 underline" style="color: white !important;">Logout</a>
+                    @else
                         <a href="{{ route('login') }}" class="text-sm text-white-700 underline" style="color: white !important;">Log in</a>
 
                         @if (Route::has('register'))
@@ -47,7 +50,7 @@
 
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                <a href="{{ URL('/') }}">  <img src="https://ideraos.com/_nuxt/img/fbd9580.svg" /></a>
+                 <a href="{{ URL('/') }}">  <img src="https://ideraos.com/_nuxt/img/fbd9580.svg" /></a>
                 </div>
 
          
@@ -55,25 +58,67 @@
             </div>
         </div>
 
-
         <div class="container">
             <div class="row">
-            <h1>Idera Cinemas</h1>
-            <small>Please select one of the cinemas to view showtimes</small>
+            <h1>Idera Cinemas - Add New Showtime
+            
+           </h1>
+            <!-- <small>View showtimes below</small> -->
 
-            @if(count($cinemas) > 0)
-                @foreach($cinemas as $cinema)
-                <div class="col-md-12 p-6 border-t border-gray-200 dark:border-gray-700">
-                                 <a href="{{ URL('/viewShowtime/'.$cinema->id ) }}">   {{ $cinema->name }}</a>
-                </div>
-                @endforeach
-           
-            @else
+            <div class="col-md-6 p-6 border-t border-gray-200 dark:border-gray-700">
+            @if(isset($errors))
+                    @foreach($errors->all() as $error)
+                    <div  align="center"  class="alert alert-danger center" id="error-notification">
+                       <p>{{ $error }}</p>
+                   </div>
+                   @endforeach
+                   @endif
 
-<div class="col-md-12">
-                                   No cinemas found in the database. Please feed the db.
-                </div>
-            @endif
+            <form action="{{ URL('admin/addShowtime') }}" method="POST" class="form-group">
+            @csrf
+            <div class="form-group">
+                <label>Cinema </label>
+               <select name="cinemaId" class="form-control" style="background-color: antiquewhite !important;">
+
+               @foreach($cinemas as $cinema)
+
+                <option value="{{ $cinema->id}}"> {{$cinema->name}}</option>
+
+               @endforeach
+
+               </select>
+
+            </div>
+
+
+            <div class="form-group">
+                <label>Movie Title</label>
+                <input required class="form-control"  type="text" name="title" style="background-color: antiquewhite !important;"/>
+
+            </div>
+
+            <div class="form-group">
+                <label>Category E.g Horror</label>
+                <input required class="form-control"  type="text" name="category" style="background-color: antiquewhite !important;"/>
+
+            </div>
+
+            <div class="form-group">
+                <label>Date And Time E.g Wednesday 12 April 2021 10:15PM</label>
+                <input  required class="form-control"  type="text" name="showTime" style="background-color: antiquewhite !important;"/>
+
+            </div>
+
+
+            <button type="submit"  class="btn btn-lg btn-success">Add showtime</button>
+            
+            </form>
+            
+            
+            </div>
+
+
+          
                
             </div>
         </div>

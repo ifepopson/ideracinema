@@ -23,9 +23,14 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['middleware' => 'auth'], function () {
 
-    
-    Route::post('admin/addShowtime', 'AdminController@pushShowTime');
-    Route::get('admin/addShowtime', 'AdminController@showTimePage');
+
+
+    Route::post('/admin/addShowtime', [App\Http\Controllers\AdminController::class, 'pushShowTime'])->name('showTimePage');
+
+Route::get('/admin/addShowtime', [App\Http\Controllers\AdminController::class, 'showTimePage'])->name('showTimePage');
+
+
+Route::get('/signout', [App\Http\Controllers\AdminController::class, 'signout'])->name('signout');
 
 
     
