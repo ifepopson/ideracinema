@@ -32,17 +32,17 @@
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
 
-                    <a href="{{ url('/') }}" class="text-sm text-white-700 underline" style="color: white !important;">Home </a>
+                    <a href="{{ url('/') }}" class="text-sm text-white-700 underline" style="color: white !important;margin-right: 10px;">Home </a>
 
 
-                        <a href="{{ url('/admin/addShowtime') }}" class="text-sm text-white-700 underline" style="color: white !important;">Add Showtime</a>
+                        <a href="{{ url('/admin/addShowtime') }}" class="text-sm text-white-700 underline" style="color: white !important;margin-right: 10px;">Add Showtime</a>
 
-                        <a href="{{ url('/signout') }}" class="text-sm text-white-700 underline" style="color: white !important;">Logout</a>
+                        <a href="{{ url('/signout') }}" class="text-sm text-white-700 underline" style="color: white !important;margin-right: 10px;">Logout</a>
                     @else
-                        <a href="{{ route('login') }}" class="text-sm text-white-700 underline" style="color: white !important;">Log in</a>
+                        <a href="{{ route('login') }}" class="text-sm text-white-700 underline" style="color: white !important;margin-right: 10px;">Log in</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-white-700 underline" style="color: white !important;">Register</a>
+                            <a href="{{ route('register') }}" class="ml-4 text-sm text-white-700 underline" style="color: white !important;margin-right: 10px;">Register</a>
                         @endif
                     @endauth
                 </div>
@@ -114,7 +114,7 @@
             
             </form>
             
-            
+            <a href="{{ URL('/') }}"><button type="button"  class="btn btn-lg btn-danger">Home</button></a>
             </div>
 
 

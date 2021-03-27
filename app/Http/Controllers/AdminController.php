@@ -4,16 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\cinema;
-use App\Models\showtime;
+use App\Http\Controllers\Repository\CinemaRepository;
+use App\Http\Controllers\Repository\ShowtimeRepository;
+
+use Illuminate\Support\Facades\Auth;
+
+
 
 class AdminController extends Controller
 {
-    //
+    protected $cinema = null;
+    protected $showtime = null;
+    
+    public function __construct(CinemaRepository $cinema,ShowtimeRepository $showtime)
+    {
+        $this->cinema = $cinema;
+        $this->showtime = $showtime;
+    }
 
     public function showTimePage(){
 
-        $cinema = cinema::all();
+        $cinema = $this->cinema->getall();
 
         $data = ['cinemas' => $cinema];
 
@@ -24,7 +35,7 @@ class AdminController extends Controller
     public function pushShowTime(Request $req){
 
 
-        $target = showtime::create($req->except('_token'));
+        $target = $this->showtime->createShowtime($req);
 
 
         return redirect()->back()->withInput()->withErrors("Showtime Added Successfully.");
