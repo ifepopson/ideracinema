@@ -75,7 +75,9 @@
                                     {{ $showtime->category }} <br/>
                 </div>
                 @endforeach
-           
+                <div class="col-md-12">
+                 <a href="{{ URL('/') }}"><button type="button"  class="btn btn-lg btn-danger">Home</button></a>
+            </div>
             @else
 
 <div class="col-md-12">
